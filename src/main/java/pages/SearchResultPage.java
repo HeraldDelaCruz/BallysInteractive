@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,8 +46,8 @@ public class SearchResultPage {
 	@FindBy(css = "button[class='btn text-capitalize text-muted d-none d-sm-inline']")
 	private WebElement ClearAllFilter;
 	
-	@FindBy(css = "#logo")
-	private WebElement SearchResultHeaderLogo;
+	@FindBy(css = "body > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > h6:nth-child(2)")
+	private WebElement ResultPageMatchesLocationText;
 	
 	
 	
@@ -88,9 +89,13 @@ public class SearchResultPage {
 		
 	}
 	
-	public boolean isSearchResultLogoDisplayed() {
-		return commonUtils.isElementDisplayed(SearchResultHeaderLogo, commonUtils.EXPLICIT_WAIT_TIME);
-		
+	public boolean isLocationMatchesDisplayed() {
+		try{
+			return commonUtils.isElementDisplayed(ResultPageMatchesLocationText, commonUtils.EXPLICIT_WAIT_TIME);
+		}
+		catch(StaleElementReferenceException e) {
+			return commonUtils.isElementDisplayed(ResultPageMatchesLocationText, commonUtils.EXPLICIT_WAIT_TIME);
+		}
 	}
 	
 	public boolean isClearAllDisplayed() {

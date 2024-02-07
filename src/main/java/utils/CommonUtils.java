@@ -121,7 +121,7 @@ public class CommonUtils {
 	}
 	
 	public String getWebPageTitle() throws Throwable {	
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		return driver.getTitle();
 	}
 	

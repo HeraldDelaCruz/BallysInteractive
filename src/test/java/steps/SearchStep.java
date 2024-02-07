@@ -16,16 +16,12 @@ public class SearchStep {
 	private HomePage homePage;
 	private SearchResultPage searchResultPage;
 	private LoginPage loginPage;
-		
-	@Given("User is in the Home page")
-	public void user_is_in_the_home_page() {
-		driver = DriverFactory.getDriver();
-		homePage = new HomePage(driver);
-	}
-	
 	
 	@When("User enters {string} , {string} and {string}")
 	public void user_enters_and(String keyword, String date, String location) {
+		driver = DriverFactory.getDriver();
+		homePage = new HomePage(driver);
+		
 		homePage.enterSearchKeyword(keyword);
 		homePage.enterSearchDate(date);
 		homePage.enterSearchLocation(location);
@@ -36,14 +32,15 @@ public class SearchStep {
 	}
 
 	@When("User clicks search button")
-	public void user_clicks_search_button() {
+	public void user_clicks_search_button() {		
 		searchResultPage = homePage.clickOnSearchIcon();
 	}
 
 	
 	@Then("User redirect to Search Result Page")
 	public void user_redirect_to_search_result_page() throws Throwable {
-		Assert.assertTrue(searchResultPage.isSearchResultLogoDisplayed());
+		Thread.sleep(1000);
+		Assert.assertTrue(searchResultPage.isLocationMatchesDisplayed());
 	}
 
 	
@@ -60,6 +57,8 @@ public class SearchStep {
 	
 	@Given("User is loggedin to the website")
 	public void user_is_loggedin_to_the_website() {
+		driver = DriverFactory.getDriver();
+		homePage = new HomePage(driver);
 	    loginPage = new LoginPage(driver);
 	    
 	    homePage.clickOnHomePageLoginButton();

@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import driverFactory.DriverFactory;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.BlogSitePage;
@@ -12,7 +11,6 @@ import pages.BrowsePage;
 import pages.HomePage;
 import pages.RedeemPage;
 import pages.RegisterPage;
-
 import utils.CommonUtils;
 
 
@@ -26,27 +24,18 @@ public class HomeSteps {
 	private BrowsePage browsePage;
 	private BlogSitePage blogSitePage;
 	
-	
-	@Given("User is in the websites Home page")
-	public void user_is_in_the_websites_home_page() {
-		driver = DriverFactory.getDriver();
-		homePage = new HomePage(driver);
-		commonUtils = new CommonUtils(driver);
-	}
-	
-	
-	@When("User clicks on {int} days trial button")
-	public void user_clicks_on_days_trial_button(Integer int1) {
+	@When("User clicks on seven days trial button")
+	public void user_clicks_on_seven_days_trial_button() {
+	   driver = DriverFactory.getDriver();
 	   homePage = new HomePage(driver);
-	   
-	   
+
 	   registerPage = homePage.clickOnFreeTrialButton();
 	}
 	
 	
 	@Then("User should redirect to Register Page")
 	public void user_should_redirect_to_register_page() throws Throwable {
-	   
+	   commonUtils = new CommonUtils(driver);
 	   String pageTitle = commonUtils.getWebPageTitle();
 	   Assert.assertEquals(pageTitle, "Start a Free Trial - Newspapers.com™"); 
 	   
@@ -76,11 +65,16 @@ public class HomeSteps {
 	
 	@When("User clicks on explore all location")
 	public void user_clicks_on_explore_all_location() {
+		driver = DriverFactory.getDriver();
+		homePage = new HomePage(driver);
+		
 	    browsePage = homePage.clickOnExploreLocationsButton();
 	}
 	
 	@Then("User should redirect to Browse Page")
 	public void user_should_redirect_to_browse_page() throws Throwable {
+		commonUtils = new CommonUtils(driver);
+		
 		String pageTitle = commonUtils.getWebPageTitle();
 		Assert.assertEquals(pageTitle, "Browse"); 
 	}
@@ -93,12 +87,17 @@ public class HomeSteps {
 	
 	@When("User clicks on Blogs")
 	public void user_clicks_on_blogs() {
+		driver = DriverFactory.getDriver();   
+		homePage = new HomePage(driver);
+		
 	    blogSitePage = homePage.clickOnBlogSiteButton();
 	}
 	
 	
 	@Then("User should redirect to Official Blog site")
 	public void user_should_redirect_to_official_blog_site() throws Throwable {
+		commonUtils = new CommonUtils(driver);
+		
 		String pageTitle = commonUtils.getWebPageTitle();
 		Assert.assertEquals(pageTitle, "- The official blog of Newspapers.com");  
 	}

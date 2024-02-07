@@ -59,7 +59,3 @@ Scenario Outline: Search Newspaper as Loggedin User with blank search criteria
 	
 	
 #Scenario: Search Newspaper using audio 
-	
-	
-	
-	
