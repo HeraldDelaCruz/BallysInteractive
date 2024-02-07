@@ -10,14 +10,14 @@ Scenario: Verify 7 days trial link
  And   Signup Header text should displayed
  
 
-Scenario: Verify Redeem explore location link
+Scenario: Verify explore location link
  Given User is in the websites Home page
  When  User clicks on explore all location
  Then  User should redirect to Browse Page
  And   Browse Header text should be displayed
 
 
-Scenario: Verify footer Blogs link'
+Scenario: Verify footer Blogs link
  Given User is in the websites Home page
  When  User clicks on Blogs
  Then  User should redirect to Official Blog site
